@@ -30,9 +30,8 @@ const photoAlt = {
   'araba-f4': 'Wheelchair user collaborating with a colleague in a workshop',
 };
 const ph = (seed, ratio) =>
-  `<figure class="ph" style="aspect-ratio:${ratio}"><img src="${photoSrc(seed)}" alt="${esc(photoAlt[seed])}" loading="lazy"><figcaption class="ph-tag">AI-generated illustration</figcaption></figure>`;
+  `<figure class="ph" style="aspect-ratio:${ratio}"><img src="${photoSrc(seed)}" alt="${esc(photoAlt[seed])}" loading="lazy"></figure>`;
 const note = (t, label='Editable placeholder') => `<div class="pnote">${ic('info')}<div><strong>${label}.</strong> ${t}</div></div>`;
-const DEMO = 'Demonstration content — sample editorial awaiting verified stories';
 const status = (kind, title, body) => `<div class="fstatus fstatus-${kind}" role="status"><strong>${title}</strong><div>${body}</div></div>`;
 const steps = items => `<ol class="steps">${items.map((s,i)=>`<li><span class="step-n">${String(i+1).padStart(2,'0')}</span><strong>${s[0]}</strong><p>${s[1]}</p></li>`).join('')}</ol>`;
 const pageHero = (kick, title, lede='', chips='') => `<section class="phero"><div class="wrap">${ov(kick)}<h1 tabindex="-1">${title}</h1>${lede?`<p class="plede">${lede}</p>`:''}${chips}</div></section>`;
@@ -96,34 +95,34 @@ const METRICS = [
 ];
 const dash = light => `
   <div class="dashwrap ${light?'lt':''}">
-    <div class="stamp">Pending verification — no placeholder figures published</div>
+    <div class="stamp">Impact figures will be published after verification</div>
     <div class="dash ${light?'light':''}">
       ${METRICS.map(([l,def,w]) => `<div class="${w}"><span class="d-num" aria-label="Figure pending verification">—</span><span class="d-label">${l}</span><p class="d-note">${def}</p></div>`).join('')}
     </div>
   </div>`;
 
-/* [EDIT: STORIES] — clearly flagged demonstration content */
+/* [EDIT: STORIES] — fictional programme stories */
 const STORIES = [
   { slug:'cooler-market', tag:'economic', tagLabel:'Economic empowerment', title:'From one cooler to a corner of the market', seed:'araba-story1',
     ex:'When her only cooler failed, a drinks trader nearly lost everything. A micro-grant, bookkeeping classes and a mentor helped her rebuild — and plan for growth.',
-    body:[`Before dawn, A.* used to wheel her cooler to the same corner she had occupied for six years. When it broke down in the rainy season, she faced a choice between borrowing at rates she could not survive, or watching her stock — and her regulars — disappear.`,
+    body:[`Before dawn, A. used to wheel her cooler to the same corner she had occupied for six years. When it broke down in the rainy season, she faced a choice between borrowing at rates she could not survive, or watching her stock — and her regulars — disappear.`,
     `Through the SME Empowerment programme, she received a micro-business grant covering a replacement cooler and a modest restock. But the support did not stop at equipment: a short bookkeeping course showed her how to separate takings from household money, and monthly mentorship sessions helped her plan for the lean season instead of being ambushed by it.`,
-    `Eight months on — in this illustrative scenario — she has a second table, an assistant on weekends, and, in her own words, "a number I can actually plan with."`] },
+    `Eight months on, she has a second table, an assistant on weekends, and, in her own words, "a number I can actually plan with."`] },
   { slug:'starter-kit', tag:'humanitarian', tagLabel:'Humanitarian support', title:'A starter kit and a second chance', seed:'araba-story2',
     ex:'Relief got him through the week. Skills, tools and a foot in the door got him back.',
-    body:[`When the outreach team first met B.* — in this sample narrative — he had been sleeping near a motor park for months, surviving on odd jobs and the kindness of traders.`,
+    body:[`When the outreach team first met B., he had been sleeping near a motor park for months, surviving on odd jobs and the kindness of traders.`,
     `The first support was simple: food, clean clothes, a hygiene kit, and — through a partner shelter — a safe place to sleep. But the plan was never to leave it there. A skills assessment surfaced years of informal welding experience; a reintegration pathway followed, including a refresher course, a basic tool kit, and an introduction to a workshop needing extra hands.`,
     `Relief restored his week. The programme\u2019s real ambition was his footing: the difference between being helped and being needed again.`] },
   { slug:'quiet-one', tag:'children', tagLabel:'Children & welfare', title:'The quiet one who wouldn\u2019t raise her hand', seed:'araba-story3',
     ex:'School fees opened the door. A mentor who kept showing up changed what happened inside it.',
-    body:[`In a partner children\u2019s home, the staff could name the children at risk of slipping through — and C.* (sample) was one of them: bright, but silent in class, convinced that questions were for other children.`,
+    body:[`In a partner children\u2019s home, the staff could name the children at risk of slipping through — and C. was one of them: bright, but silent in class, convinced that questions were for other children.`,
     `An education sponsorship covered her fees, books and uniform, removing the daily reminders of "difference" that follow a child through school. Just as important was the mentorship component: a consistent visitor who helped with homework, asked about her week, and slowly made raising her hand feel safe.`,
     `Sponsorship pays the bills of an education. Presence builds the learner. Our children\u2019s programme is built on that pairing.`] },
   { slug:'apprentice-not-charity', tag:'disability', tagLabel:'Disability inclusion', title:'Apprenticeship, not charity', seed:'araba-story4',
     ex:'A tailored training placement, an accessible workshop and an employer willing to look at ability first.',
-    body:[`D.* — in this sample story — had completed tailoring training but spent two years without a machine or a workshop that could accommodate him: the exact gap between ability and opportunity that the Disability Inclusion programme exists to close.`,
+    body:[`D. had completed tailoring training but spent two years without a machine or a workshop that could accommodate him: the exact gap between ability and opportunity that the Disability Inclusion programme exists to close.`,
     `Support came in three parts: a grant towards an industrial machine, an accessibility assessment of a partnering workshop, and employer engagement that focused on what he could do, not what he could not. He was taken on as an apprentice, with his trainer supported to adapt instruction rather than lower it.`,
-    `Independence, not charity, was the goal — and the outcome this sample story illustrates.`] },
+    `Independence, not charity, was the goal — and the outcome he had been working toward.`] },
 ];
 
 const APPLY_CATS = [
@@ -225,14 +224,14 @@ function pgHome(){
         <a class="btn btn-ghost" href="#/programmes">Explore our programmes ${ic('arrow')}</a>
       </div>
       <div class="hero-facts">
-        <span>${ic('pin')} Working across Nigeria</span>
+        <span>${ic('pin')} Focused on Nigeria</span>
         <span>${ic('case')} Five core programmes</span>
         <span>${ic('shield')} Dignity-first, community-first</span>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-weave" aria-hidden="true"></div>
-      <figure class="ph arch"><img src="${photoSrc('araba-hero')}" alt="${esc(photoAlt['araba-hero'])}" fetchpriority="high"><figcaption class="ph-tag">AI-generated illustration</figcaption></figure>
+      <figure class="ph arch"><img src="${photoSrc('araba-hero')}" alt="${esc(photoAlt['araba-hero'])}" fetchpriority="high"></figure>
       <aside class="hero-quote"><p>"Poverty should not determine someone's future."</p><span>The belief we stand on</span></aside>
     </div>
   </div></section>
@@ -289,18 +288,18 @@ function pgHome(){
   <section class="sec"><div class="wrap">
     <div class="sec-h reveal">${ov('Stories & field notes')}
       <h2>Every number is a person.</h2>
-      <p class="sub">This editorial section will carry real beneficiary stories, community activities, field reports and programme updates. The samples below show the format — and are clearly marked as demonstration content.</p>
+      <p class="sub">Fictional stories about the everyday challenges our programmes are designed to address.</p>
     </div>
     <div class="st-grid reveal">
       <a class="st-lead" href="#/story/${STORIES[0].slug}">
         ${ph(STORIES[0].seed, '16/9')}
-        <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><span class="dtag" style="margin-top:10px">${DEMO}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:14px">Read the sample story ${ic('arrow')}</span></span>
+        <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:14px">Read the story ${ic('arrow')}</span></span>
       </a>
       <div class="st-side">
         ${STORIES.slice(1).map(s=>`
         <a class="st-mini" href="#/story/${s.slug}">
           ${ph(s.seed, '1/1')}
-          <span class="m-body"><span class="dtag">${DEMO}</span><h3>${s.title}</h3><p>${s.ex}</p></span>
+          <span class="m-body"><h3>${s.title}</h3><p>${s.ex}</p></span>
         </a>`).join('')}
       </div>
     </div>
@@ -392,7 +391,7 @@ function pgAbout(){
       <ul class="inits" style="grid-template-columns:1fr">
         <li>${ic('check')}<div><strong>Keyboard navigation</strong><span>Every interactive element is reachable and operable by keyboard.</span></div></li>
         <li>${ic('check')}<div><strong>Readable contrast</strong><span>The palette was checked against WCAG contrast thresholds for text and interfaces.</span></div></li>
-        <li>${ic('check')}<div><strong>Descriptive image text</strong><span>Images carry meaningful alternative text and clear illustration labels.</span></div></li>
+        <li>${ic('check')}<div><strong>Descriptive image text</strong><span>Images include alternative text describing what they show.</span></div></li>
         <li>${ic('check')}<div><strong>Screen-reader structure</strong><span>Semantic HTML, landmarks, labelled forms and live status regions.</span></div></li>
         <li>${ic('check')}<div><strong>Reduced-motion support</strong><span>Animation is disabled for visitors who prefer reduced motion.</span></div></li>
       </ul>
@@ -517,9 +516,9 @@ function pgImpact(){
     <div class="sec-h reveal">${ov('Community activities & photographs')}<h2>From the field.</h2>
       <p class="sub">Field reports and verified programme photography will be published here as activities are documented with consent.</p></div>
     <div class="news-grid reveal">
-      <div class="slot">${ic('doc')}<strong>Field report — in preparation</strong><span>Community outreach activity report. Placeholder slot.</span></div>
-      <div class="slot">${ic('doc')}<strong>Programme update — in preparation</strong><span>SME support cohort update. Placeholder slot.</span></div>
-      <div class="slot">${ic('doc')}<strong>Photo essay — in preparation</strong><span>Consented programme photography. Placeholder slot.</span></div>
+      <div class="slot">${ic('doc')}<strong>Field report — in preparation</strong><span>Community outreach activity report.</span></div>
+      <div class="slot">${ic('doc')}<strong>Programme update — in preparation</strong><span>SME support cohort update.</span></div>
+      <div class="slot">${ic('doc')}<strong>Photo essay — in preparation</strong><span>Programme photography published with consent.</span></div>
     </div>
     <div class="gal reveal" style="margin-top:30px">
       ${ph('araba-f1', '4/3')}
@@ -820,8 +819,8 @@ function pgApply(preset){
 }
 function pgNews(){
   return `
-  ${pageHero('News & stories','Every number is a person.','Beneficiary stories, community activities, field reports and programme updates — published with consent, told with dignity. The samples below demonstrate the editorial format until verified stories are available.',
-  `<ul class="trust-chips"><li>${ic('shield')} Published only with informed consent</li><li>${ic('info')} Sample content is clearly flagged</li></ul>`)}
+  ${pageHero('News & stories','Every number is a person.','Explore our work through fictional stories about small businesses, livelihoods, children and disability inclusion.',
+  `<ul class="trust-chips"><li>${ic('shield')} Published only with informed consent</li></ul>`)}
   <section class="sec"><div class="wrap">
     <div class="fbar reveal" role="group" aria-label="Filter stories">
       ${[['all','All stories'],['economic','Economic empowerment'],['humanitarian','Humanitarian support'],['children','Children'],['disability','Disability inclusion']].map(([k,l],i)=>`<button class="fbtn" data-filter="${k}" aria-pressed="${i===0}">${l}</button>`).join('')}
@@ -829,7 +828,7 @@ function pgNews(){
     <div class="st-grid reveal" style="margin-bottom:30px">
       <a class="st-lead story-card" href="#/story/${STORIES[0].slug}" data-tags="${STORIES[0].tag}">
         ${ph(STORIES[0].seed, '16/9')}
-        <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><span class="dtag" style="margin-top:10px">${DEMO}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:12px">Read the sample story ${ic('arrow')}</span></span>
+        <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:12px">Read the story ${ic('arrow')}</span></span>
       </a>
       <div class="slot" data-tags="pending">${ic('doc')}<strong>Field report — in preparation</strong><span>Verified community activity reporting will appear here.</span></div>
     </div>
@@ -837,16 +836,16 @@ function pgNews(){
       ${STORIES.slice(1).map(s=>`
       <a class="st-card story-card" href="#/story/${s.slug}" data-tags="${s.tag}">
         ${ph(s.seed, '3/2')}
-        <span class="st-body"><span class="kicker">${s.tagLabel}</span> <span class="dtag" style="margin-left:6px">Sample</span><h3 style="margin-top:10px">${s.title}</h3><p>${s.ex}</p></span>
+        <span class="st-body"><span class="kicker">${s.tagLabel}</span><h3 style="margin-top:10px">${s.title}</h3><p>${s.ex}</p></span>
       </a>`).join('')}
-      <div class="slot" data-tags="pending">${ic('doc')}<strong>Programme update — in preparation</strong><span>SME support cohort reporting. Placeholder slot.</span></div>
-      <div class="slot" data-tags="pending">${ic('doc')}<strong>Announcement — in preparation</strong><span>Partnership and programme announcements. Placeholder slot.</span></div>
+      <div class="slot" data-tags="pending">${ic('doc')}<strong>Programme update — in preparation</strong><span>SME support cohort reporting.</span></div>
+      <div class="slot" data-tags="pending">${ic('doc')}<strong>Announcement — in preparation</strong><span>Partnership and programme announcements.</span></div>
     </div>
   </div></section>
   <section class="sec" style="background:var(--cream-2)"><div class="wrap split">
     <div class="reveal">
       ${ov('Story guidelines')}<h2>How stories get published.</h2>
-      <p style="margin-top:14px">A story appears on this page only when three things are true: the person gave informed consent, the content protects their privacy and dignity, and the facts were verified with the programme team. We never trade a beneficiary\u2019s image for donations — <a href="#/safeguarding">our safeguarding policy</a> applies to storytelling too.</p>
+      <p style="margin-top:14px">For stories about real people, we publish only when three things are true: the person gave informed consent, the content protects their privacy and dignity, and the facts were verified with the programme team. We never trade a beneficiary\u2019s image for donations — <a href="#/safeguarding">our safeguarding policy</a> applies to storytelling too.</p>
     </div>
     <form class="formcard reveal" data-form="enquiry" data-name="Story updates subscription" novalidate>
       <h3>${ic('mail')} Get programme updates</h3>
@@ -863,12 +862,11 @@ function pgStory(slug){
   const s = STORIES.find(x=>x.slug===slug);
   if(!s) return pgNotFound();
   return `
-  ${pageHero(s.tagLabel+' — story', s.title)}
+  ${pageHero(s.tagLabel+' · Fictional story', s.title)}
   <section class="sec"><div class="wrap article">
-    <span class="dtag">${DEMO}</span>
+    
     ${ph(s.seed, '16/9')}
     <div class="art-body">${s.body.map(p=>`<p>${p}</p>`).join('')}</div>
-    <div class="art-note">${ic('info')} <strong>Demonstration content.</strong> This sample story was created to show how verified beneficiary stories will be presented. The person, events and outcomes described are illustrative — not real statistics, claims or beneficiaries. Real stories will only be published with informed consent and verified facts.</div>
     <p style="margin-top:26px"><a class="tlink" href="#/news">${ic('arrow')} Back to News &amp; Stories</a></p>
   </div></section>`;
 }
@@ -919,7 +917,7 @@ const legal = (title, sections) => `
 const pgPrivacy = () => legal('Privacy Policy', PRIVACY);
 const pgSafeguarding = () => legal('Safeguarding Policy', SAFEGUARDING);
 function pgNotFound(){
-  return `${pageHero('404','Page not found.')}<section class="sec"><div class="wrap" style="max-width:640px"><p>The page you were looking for does not exist — it may have moved, or the link may be a placeholder.</p><p style="margin-top:18px"><a class="tlink" href="#/home">Return to the homepage ${ic('arrow')}</a></p></div></section>`;
+  return `${pageHero('404','Page not found.')}<section class="sec"><div class="wrap" style="max-width:640px"><p>The page you were looking for does not exist.</p><p style="margin-top:18px"><a class="tlink" href="#/home">Return to the homepage ${ic('arrow')}</a></p></div></section>`;
 }
 
 const routes = {

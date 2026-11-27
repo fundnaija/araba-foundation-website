@@ -119,7 +119,6 @@ body.lock{overflow:hidden}
 .ph{position:relative;overflow:hidden;background:var(--cream-2);border-radius:2px}
 .ph img{width:100%;height:100%;object-fit:cover}
 .ph::after{content:"";position:absolute;inset:0;background:rgba(16,35,28,.10);mix-blend-mode:multiply;pointer-events:none}
-.ph-tag{position:absolute;left:10px;bottom:10px;z-index:2;background:rgba(16,35,28,.85);color:var(--cream);font-size:.66rem;letter-spacing:.07em;padding:4px 9px;border-radius:2px}
 .ph.arch{border-radius:2px;border-top:3px solid var(--gold);z-index:1;aspect-ratio:4/5}
 .hero-quote{position:absolute;left:-16px;bottom:30px;z-index:3;background:var(--white);border:1px solid var(--line);border-top:3px solid var(--gold);box-shadow:var(--sh);border-radius:var(--rad);padding:18px 22px;max-width:300px}
 .hero-quote p{font:italic 500 1.14rem/1.4 var(--f-d);color:var(--ink)}
@@ -393,6 +392,16 @@ footer h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:va
   .top-r{display:none}
   .topbar .wrap{justify-content:center}
   .topbar{text-align:center}
+}
+@media screen and (prefers-reduced-motion:no-preference){
+  .hero-visual .ph img,.pi-media img.on,.st-lead:hover .ph img,.st-card:hover .ph img,
+  .st-lead:focus-visible .ph img,.st-card:focus-visible .ph img{
+    animation:photo-zoom 24s ease-out both;
+  }
+  @keyframes photo-zoom{
+    from{transform:scale(1)}
+    to{transform:scale(1.08)}
+  }
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
