@@ -11,8 +11,26 @@ const DONATE_AMOUNTS = [5000, 10000, 25000, 50000, 100000];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ic = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const ov = t => `<p class="ov">${t}</p>`;
-const ph = (seed, alt, ratio='4/5', tag='Placeholder image — awaiting verified field photography') =>
-  `<figure class="ph" style="aspect-ratio:${ratio}"><img src="https://picsum.photos/seed/${seed}/1200/900.jpg" alt="${esc(alt)}" loading="lazy"><figcaption class="ph-tag">${tag}</figcaption></figure>`;
+const photoSrc = seed => `assets/images/${seed}.webp`;
+const photoAlt = {
+  'araba-hero': 'Woman arranging produce in a Nigerian market',
+  'araba-sme': 'Woman working in a Nigerian tailoring shop',
+  'araba-startup': 'Two young Nigerian entrepreneurs working together',
+  'araba-hope': 'Market worker taking a break beside a handcart',
+  'araba-children': 'Mother holding her baby in a community setting',
+  'araba-ability': 'Wheelchair user working at a workbench',
+  'araba-story1': 'Market stall owner beside a cooler',
+  'araba-story2': 'Street vendor arranging supplies',
+  'araba-story3': 'Schoolgirl reading with classmates',
+  'araba-story4': 'Apprentice working alongside a mentor',
+  'araba-about': 'Neighbours gathering in Nigeria',
+  'araba-f1': 'Two women sharing practical skills at a work table',
+  'araba-f2': 'Man shopping for produce at a market',
+  'araba-f3': 'Caregiver reading with children in a community centre',
+  'araba-f4': 'Wheelchair user collaborating with a colleague in a workshop',
+};
+const ph = (seed, ratio) =>
+  `<figure class="ph" style="aspect-ratio:${ratio}"><img src="${photoSrc(seed)}" alt="${esc(photoAlt[seed])}" loading="lazy"><figcaption class="ph-tag">AI-generated illustration</figcaption></figure>`;
 const note = (t, label='Editable placeholder') => `<div class="pnote">${ic('info')}<div><strong>${label}.</strong> ${t}</div></div>`;
 const DEMO = 'Demonstration content — sample editorial awaiting verified stories';
 const status = (kind, title, body) => `<div class="fstatus fstatus-${kind}" role="status"><strong>${title}</strong><div>${body}</div></div>`;
@@ -214,7 +232,7 @@ function pgHome(){
     </div>
     <div class="hero-visual">
       <div class="hero-weave" aria-hidden="true"></div>
-      <figure class="ph arch"><img src="https://picsum.photos/seed/araba-hero/900/1200.jpg" alt="Placeholder photograph of a Nigerian community scene — to be replaced with verified field photography" fetchpriority="high"><figcaption class="ph-tag">Placeholder photography</figcaption></figure>
+      <figure class="ph arch"><img src="${photoSrc('araba-hero')}" alt="${esc(photoAlt['araba-hero'])}" fetchpriority="high"><figcaption class="ph-tag">AI-generated illustration</figcaption></figure>
       <aside class="hero-quote"><p>"Poverty should not determine someone's future."</p><span>The belief we stand on</span></aside>
     </div>
   </div></section>
@@ -248,14 +266,14 @@ function pgHome(){
       <div class="pi-rows">
         ${PROGRAMMES.map(p=>`
         <a class="prow" href="#/${p.key}" data-k="${p.key}">
-          <span class="pi-thumb"><img src="https://picsum.photos/seed/${p.seed}/400/400.jpg" alt="" loading="lazy"></span>
+          <span class="pi-thumb"><img src="${photoSrc(p.seed)}" alt="" loading="lazy"></span>
           <span class="n">${p.num}</span>
           <span><h3>${p.name}</h3><p class="d">${p.short}</p></span>
           <span class="go">${ic('arrow')}</span>
         </a>`).join('')}
       </div>
       <div class="pi-media" aria-hidden="true">
-        ${PROGRAMMES.map((p,i)=>`<img data-k="${p.key}" class="${i===0?'on':''}" src="https://picsum.photos/seed/${p.seed}/800/1000.jpg" alt="" loading="lazy">`).join('')}
+        ${PROGRAMMES.map((p,i)=>`<img data-k="${p.key}" class="${i===0?'on':''}" src="${photoSrc(p.seed)}" alt="" loading="lazy">`).join('')}
       </div>
     </div>
     <p class="reveal" style="margin-top:26px"><a class="tlink" href="#/programmes">See all programmes in detail ${ic('arrow')}</a></p>
@@ -275,13 +293,13 @@ function pgHome(){
     </div>
     <div class="st-grid reveal">
       <a class="st-lead" href="#/story/${STORIES[0].slug}">
-        ${ph(STORIES[0].seed,'Placeholder photograph illustrating a sample story','16/9','Placeholder image')}
+        ${ph(STORIES[0].seed, '16/9')}
         <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><span class="dtag" style="margin-top:10px">${DEMO}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:14px">Read the sample story ${ic('arrow')}</span></span>
       </a>
       <div class="st-side">
         ${STORIES.slice(1).map(s=>`
         <a class="st-mini" href="#/story/${s.slug}">
-          ${ph(s.seed,'Placeholder photograph illustrating a sample story','1/1','Placeholder')}
+          ${ph(s.seed, '1/1')}
           <span class="m-body"><span class="dtag">${DEMO}</span><h3>${s.title}</h3><p>${s.ex}</p></span>
         </a>`).join('')}
       </div>
@@ -327,7 +345,7 @@ function pgAbout(){
         <p style="margin-top:14px">The name <em>Araba</em> carries meaning in Yoruba tradition; we are confirming its public telling with cultural custodians before we share that story here.</p>
         ${note('Our founding story, founding team and registration details will be published here once verified. We do not publish organisational history that has not been confirmed.')}
       </div>
-      <div class="reveal">${ph('araba-about','Placeholder photograph of community life in Nigeria','4/3')}
+      <div class="reveal">${ph('araba-about', '4/3')}
         <blockquote class="obj" style="margin-top:26px"><p>"We believe that poverty should not determine someone's future. Every individual deserves dignity, opportunity, support, and the chance to build a better life."</p></blockquote>
       </div>
     </div>
@@ -374,7 +392,7 @@ function pgAbout(){
       <ul class="inits" style="grid-template-columns:1fr">
         <li>${ic('check')}<div><strong>Keyboard navigation</strong><span>Every interactive element is reachable and operable by keyboard.</span></div></li>
         <li>${ic('check')}<div><strong>Readable contrast</strong><span>The palette was checked against WCAG contrast thresholds for text and interfaces.</span></div></li>
-        <li>${ic('check')}<div><strong>Descriptive image text</strong><span>Images carry meaningful alternative text and honest placeholder labels.</span></div></li>
+        <li>${ic('check')}<div><strong>Descriptive image text</strong><span>Images carry meaningful alternative text and clear illustration labels.</span></div></li>
         <li>${ic('check')}<div><strong>Screen-reader structure</strong><span>Semantic HTML, landmarks, labelled forms and live status regions.</span></div></li>
         <li>${ic('check')}<div><strong>Reduced-motion support</strong><span>Animation is disabled for visitors who prefer reduced motion.</span></div></li>
       </ul>
@@ -422,7 +440,7 @@ function pgProgramme(key){
   const p = P(key); if(!p) return pgNotFound();
   return `
   ${pageHero('Programme '+p.num+' — Pillar '+p.pillar, p.name, p.tagline)}
-  <section style="padding:0"><div class="wrap" style="padding-top:34px">${ph(p.seed,'Placeholder photograph — '+p.formal+' programme imagery to be replaced with verified field photography','21/9','Placeholder — field photography to come')}</div></section>
+  <section style="padding:0"><div class="wrap" style="padding-top:34px">${ph(p.seed, '21/9')}</div></section>
   <section class="sec"><div class="wrap">
     <div class="split">
       <div class="reveal">
@@ -504,10 +522,10 @@ function pgImpact(){
       <div class="slot">${ic('doc')}<strong>Photo essay — in preparation</strong><span>Consented programme photography. Placeholder slot.</span></div>
     </div>
     <div class="gal reveal" style="margin-top:30px">
-      ${ph('araba-f1','Placeholder photograph — programme activity','4/3','Placeholder')}
-      ${ph('araba-f2','Placeholder photograph — programme activity','4/3','Placeholder')}
-      ${ph('araba-f3','Placeholder photograph — programme activity','4/3','Placeholder')}
-      ${ph('araba-f4','Placeholder photograph — programme activity','4/3','Placeholder')}
+      ${ph('araba-f1', '4/3')}
+      ${ph('araba-f2', '4/3')}
+      ${ph('araba-f3', '4/3')}
+      ${ph('araba-f4', '4/3')}
     </div>
     <p class="reveal" style="margin-top:22px"><a class="tlink" href="#/news">Read stories & field notes ${ic('arrow')}</a></p>
   </div></section>
@@ -810,7 +828,7 @@ function pgNews(){
     </div>
     <div class="st-grid reveal" style="margin-bottom:30px">
       <a class="st-lead story-card" href="#/story/${STORIES[0].slug}" data-tags="${STORIES[0].tag}">
-        ${ph(STORIES[0].seed,'Placeholder photograph illustrating a sample story','16/9','Placeholder image')}
+        ${ph(STORIES[0].seed, '16/9')}
         <span class="st-body"><span class="kicker">${STORIES[0].tagLabel}</span><span class="dtag" style="margin-top:10px">${DEMO}</span><h3>${STORIES[0].title}</h3><p>${STORIES[0].ex}</p><span class="tlink" style="margin-top:12px">Read the sample story ${ic('arrow')}</span></span>
       </a>
       <div class="slot" data-tags="pending">${ic('doc')}<strong>Field report — in preparation</strong><span>Verified community activity reporting will appear here.</span></div>
@@ -818,7 +836,7 @@ function pgNews(){
     <div class="news-grid reveal">
       ${STORIES.slice(1).map(s=>`
       <a class="st-card story-card" href="#/story/${s.slug}" data-tags="${s.tag}">
-        ${ph(s.seed,'Placeholder photograph illustrating a sample story','3/2','Placeholder')}
+        ${ph(s.seed, '3/2')}
         <span class="st-body"><span class="kicker">${s.tagLabel}</span> <span class="dtag" style="margin-left:6px">Sample</span><h3 style="margin-top:10px">${s.title}</h3><p>${s.ex}</p></span>
       </a>`).join('')}
       <div class="slot" data-tags="pending">${ic('doc')}<strong>Programme update — in preparation</strong><span>SME support cohort reporting. Placeholder slot.</span></div>
@@ -848,7 +866,7 @@ function pgStory(slug){
   ${pageHero(s.tagLabel+' — story', s.title)}
   <section class="sec"><div class="wrap article">
     <span class="dtag">${DEMO}</span>
-    ${ph(s.seed,'Placeholder photograph illustrating a sample story — to be replaced with consented field photography','16/9','Placeholder image')}
+    ${ph(s.seed, '16/9')}
     <div class="art-body">${s.body.map(p=>`<p>${p}</p>`).join('')}</div>
     <div class="art-note">${ic('info')} <strong>Demonstration content.</strong> This sample story was created to show how verified beneficiary stories will be presented. The person, events and outcomes described are illustrative — not real statistics, claims or beneficiaries. Real stories will only be published with informed consent and verified facts.</div>
     <p style="margin-top:26px"><a class="tlink" href="#/news">${ic('arrow')} Back to News &amp; Stories</a></p>

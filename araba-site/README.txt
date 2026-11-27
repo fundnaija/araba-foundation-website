@@ -21,7 +21,7 @@ Footer contact lines are in `index.html`. Search for `phv`.
 
 ## Preview
 
-Double-click `index.html`. Grey photo boxes are placeholders awaiting consented field photography.
+Double-click `index.html`. The site uses AI-generated editorial illustrations until consented field photography is available.
 
 ## Deploy with Cloudflare Pages
 
@@ -42,7 +42,7 @@ Keep the ZIP as your v1.0 archive or share it.
 
 ## Pre-launch notes
 
-- Contact details and photos are labelled placeholders.
+- Contact details are labelled placeholders. Generated imagery depicts fictional people and scenes.
 - Impact figures read “pending verification” until auditable numbers are available.
 - Forms validate input and explain that submission and storage require a connected backend.
 - Sample stories are flagged as demonstration content.
